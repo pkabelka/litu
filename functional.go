@@ -9,7 +9,7 @@ func Map[T, U any](a []T, f func(e T) U) []U {
 }
 
 func Filter[T any](a []T, f func(e T) bool) []T {
-    res := make([]T, 0)
+    var res []T
     for _, e := range a {
         if val := f(e); val {
             res = append(res, e)
