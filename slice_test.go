@@ -152,3 +152,26 @@ func TestEqualUnordered(t *testing.T) {
 		t.Errorf("res = %v, want %v", res, true)
 	}
 }
+
+func TestTake(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+
+	res, err := Take(x, []int{0, 2})
+	if err != nil {
+		t.Error(err.Error())
+	}
+	expect := []string{"a", "c"}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	_, err = Take(x, []int{0, 4})
+	if err == nil {
+		t.Error("Take() should cause error")
+	}
+
+	_, err = Take(x, []int{0, -1})
+	if err == nil {
+		t.Error("Take() should cause error")
+	}
+}

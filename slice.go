@@ -1,5 +1,7 @@
 package litu
 
+import "errors"
+
 func Insert[T ~[]U, U any](a T, idx int, e U) T {
 	return append(a[:idx], append(T{e}, a[idx:]...)...)
 }
@@ -47,4 +49,15 @@ func EqualUnordered[T comparable](a, b []T) bool {
 		return false
 	}
 	return All(a, b)
+}
+
+func Take[T any](a []T, indices []int) ([]T, error) {
+	res := make([]T, 0, len(a))
+	for _, i := range indices {
+		if i < 0 || i >= len(a) {
+			return []T{}, errors.New("index out of range")
+		}
+		res = append(res, a[i])
+	}
+	return res, nil
 }
