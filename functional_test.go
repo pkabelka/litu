@@ -48,3 +48,53 @@ func TestFilter(t *testing.T) {
 		t.Errorf("res = %q, want %q", res, expect)
     }
 }
+
+func TestReduceInt(t *testing.T) {
+    x := []int{1, 2, 3}
+
+    res := Reduce(x, func(acc int, e int) int {
+        return acc + e
+    }, 0)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+
+    res = Reduce(x, func(acc int, e int) int {
+        return acc * e
+    }, 1)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+
+    res = Reduce(x, func(acc int, e int) int {
+        return acc * e
+    }, 0)
+    if res != 0 {
+		t.Errorf("res = %v, want %v", res, 0)
+    }
+}
+
+func TestReduceFloat(t *testing.T) {
+    x := []float64{1, 2, 3}
+
+    res := Reduce(x, func(acc float64, e float64) float64 {
+        return acc + e
+    }, 0)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+
+    res = Reduce(x, func(acc float64, e float64) float64 {
+        return acc * e
+    }, 1)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+
+    res = Reduce(x, func(acc float64, e float64) float64 {
+        return acc * e
+    }, 0)
+    if res != 0 {
+		t.Errorf("res = %v, want %v", res, 0)
+    }
+}

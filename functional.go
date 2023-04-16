@@ -17,3 +17,10 @@ func Filter[T any](a []T, f func(e T) bool) []T {
     }
     return res
 }
+
+func Reduce[T, A any](a []T, f func(acc A, e T) A, acc A) A {
+    for _, e := range a {
+        acc = f(acc, e)
+    }
+    return acc
+}
