@@ -4,7 +4,7 @@ func Where[T any](a []T, f func(e T) bool) []int {
 	indices := make([]int, 0, len(a))
 	for i, e := range a {
 		if val := f(e); val {
-		   indices	= append(indices, i)
+			indices = append(indices, i)
 		}
 	}
 	return indices
@@ -32,7 +32,7 @@ func IndicesOf[T comparable](a []T, el T) []int {
 	indices := make([]int, 0, len(a))
 	for i, e := range a {
 		if e == el {
-		   indices	= append(indices, i)
+			indices = append(indices, i)
 		}
 	}
 	return indices
