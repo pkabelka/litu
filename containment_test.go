@@ -99,3 +99,45 @@ func TestAll(t *testing.T) {
 		t.Errorf("res = %v, want %v", res, true)
     }
 }
+
+func TestIndexOfMin(t *testing.T) {
+    x := []int{3, 5, 7, 11, 2, 4}
+
+    min, idx := IndexOfMin(x)
+    if min != 2 {
+		t.Errorf("min = %v, want %v", min, 2)
+    }
+    if idx != 4 {
+		t.Errorf("idx = %v, want %v", min, 4)
+    }
+}
+
+func TestIndexOfMax(t *testing.T) {
+    x := []int{3, 5, 7, 11, 2, 4}
+
+    max, idx := IndexOfMax(x)
+    if max != 11 {
+		t.Errorf("max = %v, want %v", max, 11)
+    }
+    if idx != 3 {
+		t.Errorf("idx = %v, want %v", max, 3)
+    }
+}
+
+func TestMin(t *testing.T) {
+    x := []int{3, 5, 7, 11, 2, 4}
+
+    min := Min(x)
+    if min != 2 {
+		t.Errorf("min = %v, want %v", min, 2)
+    }
+}
+
+func TestMax(t *testing.T) {
+    x := []int{3, 5, 7, 11, 2, 4}
+
+    max := Max(x)
+    if max != 11 {
+		t.Errorf("max = %v, want %v", max, 11)
+    }
+}
