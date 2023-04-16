@@ -25,6 +25,15 @@ func Reduce[T, A any](a []T, f func(acc A, e T) A, acc A) A {
     return acc
 }
 
+func ScanLeft[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
+    var res []A
+    for _, e := range a {
+        acc = f(acc, e)
+        res = append(res, acc)
+    }
+    return res
+}
+
 type Number interface {
     ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 |
     ~uint32 | ~uint64 | ~float32 | ~float64
