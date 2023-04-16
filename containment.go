@@ -1,6 +1,44 @@
 package litu
 
-func IndexOf[T comparable](a []T, el T) (int, bool) {
+func Where[T any](a []T, f func(e T) bool) []int {
+	indices := make([]int, 0, len(a))
+	for i, e := range a {
+		if val := f(e); val {
+		   indices	= append(indices, i)
+		}
+	}
+	return indices
+}
+
+func WhereFirst[T any](a []T, f func(e T) bool) (int, bool) {
+	for i, e := range a {
+		if ok := f(e); ok {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+func WhereLast[T any](a []T, f func(e T) bool) (int, bool) {
+	for i := len(a) - 1; i > 0; i-- {
+		if ok := f(a[i]); ok {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+func IndicesOf[T comparable](a []T, el T) []int {
+	indices := make([]int, 0, len(a))
+	for i, e := range a {
+		if e == el {
+		   indices	= append(indices, i)
+		}
+	}
+	return indices
+}
+
+func IndexOfFirst[T comparable](a []T, el T) (int, bool) {
 	for i, e := range a {
 		if e == el {
 			return i, true
@@ -9,8 +47,25 @@ func IndexOf[T comparable](a []T, el T) (int, bool) {
 	return -1, false
 }
 
+func IndexOfLast[T comparable](a []T, el T) (int, bool) {
+	for i := len(a) - 1; i > 0; i-- {
+		if a[i] == el {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+func Count[T comparable](a []T, el T) int {
+	return len(IndicesOf(a, el))
+}
+
+func CountWhere[T comparable](a []T, f func(e T) bool) int {
+	return len(Where(a, f))
+}
+
 func InSlice[T comparable](a []T, el T) bool {
-	_, found := IndexOf(a, el)
+	_, found := IndexOfFirst(a, el)
 	return found
 }
 

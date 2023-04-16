@@ -4,20 +4,148 @@ import (
 	"testing"
 )
 
-func TestFindInSlice(t *testing.T) {
-	x := []string{"a", "b", "c"}
+func TestWhere(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
 
-	idx, res := IndexOf(x, "b")
+	indices := Where(x, func(e string) bool {
+		return e == "b"
+	})
+	expect := []int{1, 3}
+	if !Equal(indices, expect) {
+		t.Errorf("indices = %v, want %v", indices, expect)
+	}
+
+	indices = Where(x, func(e string) bool {
+		return e == "d"
+	})
+	expect = []int{}
+	if !Equal(indices, expect) {
+		t.Errorf("indices = %v, want %v", indices, expect)
+	}
+}
+
+func TestWhereFirst(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	idx, res := WhereFirst(x, func(e string) bool {
+		return e == "b"
+	})
 	if res != true {
 		t.Errorf("res = %v, want %v", res, true)
 	}
 	if idx != 1 {
-		t.Errorf("res = %v, want %v", idx, 1)
+		t.Errorf("idx = %v, want %v", idx, 1)
 	}
 
-	_, res = IndexOf(x, "d")
+	_, res = WhereFirst(x, func(e string) bool {
+		return e == "d"
+	})
 	if res != false {
 		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestWhereLast(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	idx, res := WhereLast(x, func(e string) bool {
+		return e == "b"
+	})
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if idx != 3 {
+		t.Errorf("idx = %v, want %v", idx, 3)
+	}
+
+	_, res = WhereLast(x, func(e string) bool {
+		return e == "d"
+	})
+	if res != false {
+		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestIndicesOf(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	indices := IndicesOf(x, "b")
+	expect := []int{1, 3}
+	if !Equal(indices, expect) {
+		t.Errorf("indices = %v, want %v", indices, expect)
+	}
+
+	indices = IndicesOf(x, "d")
+	expect = []int{}
+	if !Equal(indices, expect) {
+		t.Errorf("indices = %v, want %v", indices, expect)
+	}
+}
+
+func TestIndexOfFirst(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	idx, res := IndexOfFirst(x, "b")
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if idx != 1 {
+		t.Errorf("idx = %v, want %v", idx, 1)
+	}
+
+	_, res = IndexOfFirst(x, "d")
+	if res != false {
+		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestIndexOfLast(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	idx, res := IndexOfLast(x, "b")
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if idx != 3 {
+		t.Errorf("idx = %v, want %v", idx, 3)
+	}
+
+	_, res = IndexOfLast(x, "d")
+	if res != false {
+		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestCount(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	count := Count(x, "b")
+	if count != 2 {
+		t.Errorf("count = %v, want %v", count, 2)
+	}
+
+	count = Count(x, "d")
+	if count != 0 {
+		t.Errorf("count = %v, want %v", count, 0)
+	}
+}
+
+func TestCountWhere(t *testing.T) {
+	x := []string{"a", "b", "c", "b"}
+
+	count := CountWhere(x, func(e string) bool {
+		return e == "b"
+	})
+
+	if count != 2 {
+		t.Errorf("count = %v, want %v", count, 2)
+	}
+
+	count = CountWhere(x, func(e string) bool {
+		return e == "d"
+	})
+	if count != 0 {
+		t.Errorf("count = %v, want %v", count, 0)
 	}
 }
 
