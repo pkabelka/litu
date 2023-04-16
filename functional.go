@@ -24,3 +24,14 @@ func Reduce[T, A any](a []T, f func(acc A, e T) A, acc A) A {
     }
     return acc
 }
+
+type Number interface {
+    ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 |
+    ~uint32 | ~uint64 | ~float32 | ~float64
+}
+
+func Sum[T Number](a []T) T {
+    return Reduce(a, func(acc T, e T) T {
+        return acc + e
+    }, 0)
+}

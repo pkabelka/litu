@@ -98,3 +98,21 @@ func TestReduceFloat(t *testing.T) {
 		t.Errorf("res = %v, want %v", res, 0)
     }
 }
+
+func TestSumInt(t *testing.T) {
+    x := []int{1, 2, 3}
+
+    res := Sum(x)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+}
+
+func TestSumFloat(t *testing.T) {
+    x := []float64{1, 2, 3}
+
+    res := Sum(x)
+    if res != 6 {
+		t.Errorf("res = %v, want %v", res, 6)
+    }
+}
