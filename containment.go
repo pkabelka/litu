@@ -28,3 +28,21 @@ func InMap[T comparable, U comparable](a map[U]T, el T) bool {
     _, found := KeyOf(a, el)
     return found
 }
+
+func Any[T comparable](a, b []T) bool {
+    for _, e := range b {
+        if InSlice(a, e) {
+            return true
+        }
+    }
+    return false
+}
+
+func All[T comparable](a, b []T) bool {
+    for _, e := range b {
+        if !InSlice(a, e) {
+            return false
+        }
+    }
+    return true
+}

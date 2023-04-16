@@ -71,3 +71,31 @@ func TestMapContains(t *testing.T) {
 		t.Errorf("res = %v, want %v", res, false)
     }
 }
+
+func TestAny(t *testing.T) {
+    x := []string{"a", "b", "c"}
+
+    res := Any(x, []string{"d", "c"})
+    if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+    }
+
+    res = Any(x, []string{"d", "e"})
+    if res != false {
+		t.Errorf("res = %v, want %v", res, true)
+    }
+}
+
+func TestAll(t *testing.T) {
+    x := []string{"a", "b", "c"}
+
+    res := All(x, []string{"c", "a"})
+    if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+    }
+
+    res = All(x, []string{"b", "d"})
+    if res != false {
+		t.Errorf("res = %v, want %v", res, true)
+    }
+}
