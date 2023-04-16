@@ -1,19 +1,30 @@
 package litu
 
-func InSlice[T comparable](a []T, el T) bool {
-    for _, e := range a {
+func IndexOf[T comparable](a []T, el T) (int, bool) {
+    for i, e := range a {
         if e == el {
-            return true
+            return i, true
         }
     }
-    return false
+    return -1, false
+}
+
+func InSlice[T comparable](a []T, el T) bool {
+    _, found := IndexOf(a, el)
+    return found
+}
+
+func KeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
+    for i, e := range a {
+        if e == el {
+            return i, true
+        }
+    }
+    var empty U
+    return empty, false
 }
 
 func InMap[T comparable, U comparable](a map[U]T, el T) bool {
-    for _, e := range a {
-        if e == el {
-            return true
-        }
-    }
-    return false
+    _, found := KeyOf(a, el)
+    return found
 }
