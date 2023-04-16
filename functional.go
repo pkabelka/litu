@@ -44,3 +44,9 @@ func Sum[T Number](a []T) T {
         return acc + e
     }, 0)
 }
+
+func CumSum[T Number](a []T) []T {
+    return ScanLeft(a, func(acc T, e T) T {
+        return acc + e
+    }, 0)
+}

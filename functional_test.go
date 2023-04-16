@@ -182,3 +182,23 @@ func TestSumFloat(t *testing.T) {
 		t.Errorf("res = %v, want %v", res, 6)
     }
 }
+
+func TestCumSumInt(t *testing.T) {
+    x := []int{1, 2, 3}
+
+    res := CumSum(x)
+    expect := []int{1, 3, 6}
+    if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+    }
+}
+
+func TestCumSumFloat(t *testing.T) {
+    x := []float64{1, 2, 3}
+
+    res := CumSum(x)
+    expect := []float64{1, 3, 6}
+    if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+    }
+}
