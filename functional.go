@@ -36,7 +36,7 @@ func ScanLeft[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
 
 type Number interface {
     ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 |
-    ~uint32 | ~uint64 | ~float32 | ~float64
+    ~uint32 | ~uint64 | ~uintptr | ~float32 | ~float64
 }
 
 func Sum[T Number](a []T) T {
