@@ -52,7 +52,7 @@ func EqualUnordered[T comparable](a, b []T) bool {
 }
 
 func Take[T any](a []T, indices []int) ([]T, error) {
-	res := make([]T, 0, len(a))
+	res := make([]T, 0, len(indices))
 	for _, i := range indices {
 		if i < 0 || i >= len(a) {
 			return []T{}, errors.New("index out of range")
