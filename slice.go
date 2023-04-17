@@ -20,8 +20,8 @@ func PopFirst[T ~[]U, U any](a T) (U, T) {
 
 func ReverseInplace[T ~[]U, U any](a T) {
 	for i := len(a)/2 - 1; i >= 0; i-- {
-		opp := len(a) - 1 - i
-		a[i], a[opp] = a[opp], a[i]
+		j := len(a) - 1 - i
+		a[i], a[j] = a[j], a[i]
 	}
 }
 
