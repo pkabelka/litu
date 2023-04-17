@@ -20,7 +20,7 @@ func WhereFirst[T any](a []T, f func(e T) bool) (int, bool) {
 }
 
 func WhereLast[T any](a []T, f func(e T) bool) (int, bool) {
-	for i := len(a) - 1; i > 0; i-- {
+	for i := len(a) - 1; i >= 0; i-- {
 		if ok := f(a[i]); ok {
 			return i, true
 		}
@@ -48,7 +48,7 @@ func IndexOfFirst[T comparable](a []T, el T) (int, bool) {
 }
 
 func IndexOfLast[T comparable](a []T, el T) (int, bool) {
-	for i := len(a) - 1; i > 0; i-- {
+	for i := len(a) - 1; i >= 0; i-- {
 		if a[i] == el {
 			return i, true
 		}

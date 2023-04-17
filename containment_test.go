@@ -58,6 +58,16 @@ func TestWhereLast(t *testing.T) {
 		t.Errorf("idx = %v, want %v", idx, 3)
 	}
 
+	idx, res = WhereLast(x, func(e string) bool {
+		return e == "a"
+	})
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if idx != 0 {
+		t.Errorf("idx = %v, want %v", idx, 0)
+	}
+
 	_, res = WhereLast(x, func(e string) bool {
 		return e == "d"
 	})
@@ -108,6 +118,14 @@ func TestIndexOfLast(t *testing.T) {
 	}
 	if idx != 3 {
 		t.Errorf("idx = %v, want %v", idx, 3)
+	}
+
+	idx, res = IndexOfLast(x, "a")
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if idx != 0 {
+		t.Errorf("idx = %v, want %v", idx, 0)
 	}
 
 	_, res = IndexOfLast(x, "d")
