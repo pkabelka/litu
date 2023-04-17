@@ -66,7 +66,7 @@ func Count[T comparable](a []T, el T) int {
 	return count
 }
 
-func CountWhere[T comparable](a []T, f func(e T) bool) int {
+func CountWhere[T any](a []T, f func(e T) bool) int {
 	count := 0
 	for _, e := range a {
 		if ok := f(e); ok {
