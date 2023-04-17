@@ -2,8 +2,8 @@ package litu
 
 import "errors"
 
-func Insert[T ~[]U, U any](a T, idx int, e U) T {
-	return append(a[:idx], append(T{e}, a[idx:]...)...)
+func Insert[T ~[]U, U any](a T, idx int, e ...U) T {
+	return append(a[:idx], append(e, a[idx:]...)...)
 }
 
 func InsertFirst[T ~[]U, U any](a T, e U) T {

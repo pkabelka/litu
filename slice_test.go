@@ -13,6 +13,13 @@ func TestInsert(t *testing.T) {
 	if !Equal(res, expect) {
 		t.Errorf("res = %v, want %v", res, expect)
 	}
+
+	res = Insert(res, 1, "e", "f", "g")
+
+	expect = []string{"a", "e", "f", "g", "d", "b", "c"}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
 }
 
 func TestInsertFirst(t *testing.T) {
