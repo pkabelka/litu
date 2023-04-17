@@ -159,6 +159,68 @@ func TestScanLeftFloat(t *testing.T) {
 	}
 }
 
+func TestScanRightInt(t *testing.T) {
+	x := []int{1, 2, 3}
+
+	res := ScanRight(x, func(acc int, e int) int {
+		return acc + e
+	}, 0)
+
+	expect := []int{3, 5, 6}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = ScanRight(x, func(acc int, e int) int {
+		return acc * e
+	}, 0)
+
+	expect = []int{0, 0, 0}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = ScanRight(x, func(acc int, e int) int {
+		return acc * e
+	}, 1)
+
+	expect = []int{3, 6, 6}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+}
+
+func TestScanRightFloat(t *testing.T) {
+	x := []float64{1, 2, 3}
+
+	res := ScanRight(x, func(acc float64, e float64) float64 {
+		return acc + e
+	}, 0)
+
+	expect := []float64{3, 5, 6}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = ScanRight(x, func(acc float64, e float64) float64 {
+		return acc * e
+	}, 0)
+
+	expect = []float64{0, 0, 0}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = ScanRight(x, func(acc float64, e float64) float64 {
+		return acc * e
+	}, 1)
+
+	expect = []float64{3, 6, 6}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+}
+
 func TestSumInt(t *testing.T) {
 	x := []int{1, 2, 3}
 

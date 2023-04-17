@@ -34,6 +34,15 @@ func ScanLeft[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
 	return res
 }
 
+func ScanRight[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
+	res := make([]A, len(a))
+	for i := len(a) - 1; i >= 0; i-- {
+		acc = f(acc, a[i])
+		res[len(a)-1-i] = acc
+	}
+	return res
+}
+
 type Number interface {
 	~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 |
 		~uint32 | ~uint64 | ~uintptr | ~float32 | ~float64
