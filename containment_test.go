@@ -167,7 +167,7 @@ func TestCountWhere(t *testing.T) {
 	}
 }
 
-func TestSliceContains(t *testing.T) {
+func TestInSlice(t *testing.T) {
 	x := []string{"a", "b", "c"}
 
 	res := InSlice(x, "b")
@@ -224,7 +224,7 @@ func BenchmarkInSliceRawLoop(b *testing.B) {
 	}
 }
 
-func TestFindInMap(t *testing.T) {
+func TestKeyOf(t *testing.T) {
 	x := map[string]int{
 		"foo": 1,
 		"bar": 2,
@@ -244,7 +244,7 @@ func TestFindInMap(t *testing.T) {
 	}
 }
 
-func TestMapContains(t *testing.T) {
+func TestInMap(t *testing.T) {
 	x := map[string]int{
 		"foo": 1,
 		"bar": 2,
