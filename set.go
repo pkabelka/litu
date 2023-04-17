@@ -84,6 +84,21 @@ func (s Set[T]) LeftJoin(s2 Set[T]) Set[T] {
 	return res
 }
 
+func (s Set[T]) Diff(s2 Set[T]) Set[T] {
+	res := NewSet[T](len(s) + len(s2))
+	for e := range s {
+		if !s2.Contains(e) {
+			res.Add(e)
+		}
+	}
+	for e := range s2 {
+		if !s.Contains(e) {
+			res.Add(e)
+		}
+	}
+	return res
+}
+
 func (s Set[T]) Equal(s2 Set[T]) bool {
 	if len(s) != len(s2) {
 		return false

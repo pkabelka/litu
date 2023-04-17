@@ -175,6 +175,21 @@ func TestSetLeftJoin(t *testing.T) {
 	}
 }
 
+func TestSetDiff(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"c", "d", "e", "f"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	res := set1.Diff(set2)
+
+	expect := map[string]struct{}{"a": {}, "b": {}, "e": {}, "f": {}}
+	if !EqualMap(res, expect) {
+		t.Errorf("res = %q, want %q", res, expect)
+	}
+}
+
 func TestSetEqual(t *testing.T) {
 	x := []string{"a", "b", "c", "d"}
 	y := []string{"d", "c", "a", "b"}
