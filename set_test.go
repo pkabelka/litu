@@ -33,6 +33,20 @@ func TestSetAddRemove(t *testing.T) {
 		t.Errorf("res = %q, want %q", set, expect)
 	}
 
+	set.Add("c", "d")
+
+	expect = map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}}
+	if fmt.Sprint(set) != fmt.Sprint(expect) {
+		t.Errorf("res = %q, want %q", set, expect)
+	}
+
+	set.Remove("c", "d")
+
+	expect = map[string]struct{}{"a": {}, "b": {}}
+	if fmt.Sprint(set) != fmt.Sprint(expect) {
+		t.Errorf("res = %q, want %q", set, expect)
+	}
+
 	set.Remove("a")
 
 	expect = map[string]struct{}{"b": {}}
@@ -97,6 +111,20 @@ func TestSetAddFrom(t *testing.T) {
 	set1.AddFrom(set2)
 
 	expect := map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}, "e": {}, "f": {}}
+	if !EqualMap(set1, expect) {
+		t.Errorf("res = %q, want %q", set1, expect)
+	}
+
+	y = []string{"f", "g", "h"}
+	z := []string{"i", "j", "k"}
+
+	set2 = NewSetFromSlice(y)
+	set3 := NewSetFromSlice(z)
+
+	set1.AddFrom(set2, set3)
+
+	expect = map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}, "e": {},
+		"f": {}, "g": {}, "h": {}, "i": {}, "j": {}, "k": {}}
 	if !EqualMap(set1, expect) {
 		t.Errorf("res = %q, want %q", set1, expect)
 	}

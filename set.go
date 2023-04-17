@@ -19,12 +19,19 @@ func (s Set[T]) Contains(e T) bool {
 	return ok
 }
 
-func (s Set[T]) Add(e T) {
-	s[e] = struct{}{}
+func (s Set[T]) Add(e ...T) {
+	for _, v := range e {
+		s[v] = struct{}{}
+	}
 }
 
-func (s Set[T]) Remove(e T) {
-	delete(s, e)
+func (s Set[T]) Remove(e ...T) {
+	for _, v := range e {
+		if !s.Contains(v) {
+			continue
+		}
+		delete(s, v)
+	}
 }
 
 func (s Set[T]) ToSlice() []T {
@@ -35,9 +42,11 @@ func (s Set[T]) ToSlice() []T {
 	return res
 }
 
-func (s Set[T]) AddFrom(s2 Set[T]) {
-	for e := range s2 {
-		s.Add(e)
+func (s Set[T]) AddFrom(s2 ...Set[T]) {
+	for _, s2_ := range s2 {
+		for e := range s2_ {
+			s.Add(e)
+		}
 	}
 }
 
