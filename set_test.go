@@ -86,3 +86,155 @@ func TestSetToSlice(t *testing.T) {
 		}
 	}
 }
+
+func TestSetAddFrom(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"c", "d", "e", "f"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	set1.AddFrom(set2)
+
+	expect := map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}, "e": {}, "f": {}}
+	if !EqualMap(set1, expect) {
+		t.Errorf("res = %q, want %q", set1, expect)
+	}
+}
+
+func TestSetIntersect(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"c", "d", "e", "f"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	res := set1.Intersect(set2)
+
+	expect := map[string]struct{}{"c": {}, "d": {}}
+	if !EqualMap(res, expect) {
+		t.Errorf("res = %q, want %q", res, expect)
+	}
+}
+
+func TestSetUnion(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"c", "d", "e", "f"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	res := set1.Union(set2)
+
+	expect := map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}, "e": {}, "f": {}}
+	if !EqualMap(res, expect) {
+		t.Errorf("res = %q, want %q", res, expect)
+	}
+}
+
+func TestSetLeftJoin(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"c", "d", "e", "f"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	res := set1.LeftJoin(set2)
+
+	expect := map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}}
+	if !EqualMap(res, expect) {
+		t.Errorf("res = %q, want %q", res, expect)
+	}
+}
+
+func TestSetEqual(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"d", "c", "a", "b"}
+
+	set1 := NewSetFromSlice(x)
+	set2 := NewSetFromSlice(y)
+
+	if !set1.Equal(set2) {
+		t.Errorf("sets should be equal")
+	}
+
+	y = []string{"d", "c", "a", "a", "b"}
+
+	set1 = NewSetFromSlice(x)
+	set2 = NewSetFromSlice(y)
+
+	if !set1.Equal(set2) {
+		t.Errorf("sets should be equal")
+	}
+
+	y = []string{"d", "c", "a", "a"}
+
+	set1 = NewSetFromSlice(x)
+	set2 = NewSetFromSlice(y)
+
+	if set1.Equal(set2) {
+		t.Errorf("sets should not be equal")
+	}
+
+	y = []string{}
+
+	set1 = NewSetFromSlice(x)
+	set2 = NewSetFromSlice(y)
+
+	if set1.Equal(set2) {
+		t.Errorf("sets should not be equal")
+	}
+
+	x = []string{}
+
+	set1 = NewSetFromSlice(x)
+
+	if !set1.Equal(set2) {
+		t.Errorf("sets should be equal")
+	}
+}
+
+func TestSetSubsetOf(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	y := []string{"d", "c", "a", "b"}
+
+	set1 := NewSetFromSlice(x)
+
+	if !set1.SubsetOf(set1) {
+		t.Errorf("a set should be a subset of itself")
+	}
+
+	set2 := NewSetFromSlice(y)
+
+	if !set1.SubsetOf(set2) {
+		t.Errorf("set1 should be a subset of set2")
+	}
+
+	y = []string{"c", "a", "a", "b"}
+
+	set2 = NewSetFromSlice(y)
+
+	if !set2.SubsetOf(set1) {
+		t.Errorf("set1 should be a subset of set2")
+	}
+
+	x = []string{"a", "a", "b"}
+
+	set1 = NewSetFromSlice(x)
+
+	if set2.SubsetOf(set1) {
+		t.Errorf("set1 should not be a subset of set2")
+	}
+
+	set1 = NewSet[string](0)
+
+	if !set1.SubsetOf(set2) {
+		t.Errorf("set1 should be a subset of set2")
+	}
+
+	set2 = NewSet[string](0)
+
+	if !set1.SubsetOf(set2) {
+		t.Errorf("set1 should be a subset of set2")
+	}
+}
