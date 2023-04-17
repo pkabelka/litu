@@ -181,6 +181,49 @@ func TestSliceContains(t *testing.T) {
 	}
 }
 
+func BenchmarkIndexOfFirst(b *testing.B) {
+	x := make([]uint64, 100000000)
+	var i uint64
+	for i = 0; i < 100000000; i++ {
+		x[i] = i
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_, _ = IndexOfFirst(x, 99999998)
+	}
+}
+
+func BenchmarkInSlice(b *testing.B) {
+	x := make([]uint64, 100000000)
+	var i uint64
+	for i = 0; i < 100000000; i++ {
+		x[i] = i
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = InSlice(x, 99999998)
+	}
+}
+
+func BenchmarkInSliceRawLoop(b *testing.B) {
+	x := make([]uint64, 100000000)
+	var i uint64
+	for i = 0; i < 100000000; i++ {
+		x[i] = i
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for _, e := range x {
+			if e == 99999998 {
+				break
+			}
+		}
+	}
+}
+
 func TestFindInMap(t *testing.T) {
 	x := map[string]int{
 		"foo": 1,
@@ -229,6 +272,20 @@ func TestAny(t *testing.T) {
 	res = Any(x, []string{"d", "e"})
 	if res != false {
 		t.Errorf("res = %v, want %v", res, true)
+	}
+}
+
+func BenchmarkAny(b *testing.B) {
+	x := make([]uint64, 100000000)
+	var i uint64
+	for i = 0; i < 100000000; i++ {
+		x[i] = i
+	}
+	y := []uint64{100000001, 100000002, 99999998}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = Any(x, y)
 	}
 }
 
