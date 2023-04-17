@@ -57,11 +57,23 @@ func IndexOfLast[T comparable](a []T, el T) (int, bool) {
 }
 
 func Count[T comparable](a []T, el T) int {
-	return len(IndicesOf(a, el))
+	count := 0
+	for _, e := range a {
+		if e == el {
+			count++
+		}
+	}
+	return count
 }
 
 func CountWhere[T comparable](a []T, f func(e T) bool) int {
-	return len(Where(a, f))
+	count := 0
+	for _, e := range a {
+		if ok := f(e); ok {
+			count++
+		}
+	}
+	return count
 }
 
 func InSlice[T comparable](a []T, el T) bool {
