@@ -3,7 +3,7 @@ package litu
 func Where[T any](a []T, f func(e T) bool) []int {
 	indices := make([]int, 0, len(a))
 	for i, e := range a {
-		if val := f(e); val {
+		if ok := f(e); ok {
 			indices = append(indices, i)
 		}
 	}
