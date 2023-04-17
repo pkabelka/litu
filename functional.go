@@ -9,7 +9,7 @@ func Map[T, U any](a []T, f func(e T) U) []U {
 }
 
 func Filter[T any](a []T, f func(e T) bool) []T {
-	var res []T
+	res := make([]T, 0, len(a))
 	for _, e := range a {
 		if val := f(e); val {
 			res = append(res, e)
@@ -26,10 +26,10 @@ func Reduce[T, A any](a []T, f func(acc A, e T) A, acc A) A {
 }
 
 func ScanLeft[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
-	var res []A
-	for _, e := range a {
+	res := make([]A, len(a))
+	for i, e := range a {
 		acc = f(acc, e)
-		res = append(res, acc)
+		res[i] = acc
 	}
 	return res
 }
