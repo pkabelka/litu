@@ -58,6 +58,13 @@ func TestReduceInt(t *testing.T) {
 	}
 
 	res = Reduce(x, func(acc int, e int) int {
+		return acc - e
+	}, 0)
+	if res != -6 {
+		t.Errorf("res = %v, want %v", res, -6)
+	}
+
+	res = Reduce(x, func(acc int, e int) int {
 		return acc * e
 	}, 1)
 	if res != 6 {
@@ -80,6 +87,13 @@ func TestReduceFloat(t *testing.T) {
 	}, 0)
 	if res != 6 {
 		t.Errorf("res = %v, want %v", res, 6)
+	}
+
+	res = Reduce(x, func(acc float64, e float64) float64 {
+		return acc - e
+	}, 0)
+	if res != -6 {
+		t.Errorf("res = %v, want %v", res, -6)
 	}
 
 	res = Reduce(x, func(acc float64, e float64) float64 {
