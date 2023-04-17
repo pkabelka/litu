@@ -122,3 +122,21 @@ func (s Set[T]) SubsetOf(s2 Set[T]) bool {
 	}
 	return true
 }
+
+func (s Set[T]) Any(e ...T) bool {
+	for _, v := range e {
+		if s.Contains(v) {
+			return true
+		}
+	}
+	return false
+}
+
+func (s Set[T]) All(e ...T) bool {
+	for _, v := range e {
+		if !s.Contains(v) {
+			return false
+		}
+	}
+	return true
+}

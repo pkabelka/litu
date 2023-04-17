@@ -281,3 +281,33 @@ func TestSetSubsetOf(t *testing.T) {
 		t.Errorf("set1 should be a subset of set2")
 	}
 }
+
+func TestSetAny(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	// y := []string{"d", "c", "a", "b"}
+
+	set1 := NewSetFromSlice(x)
+
+	if !set1.Any("e", "f", "a") {
+		t.Errorf("Any() should be true")
+	}
+
+	if set1.Any() {
+		t.Errorf("Any() should be false")
+	}
+}
+
+func TestSetAll(t *testing.T) {
+	x := []string{"a", "b", "c", "d"}
+	// y := []string{"d", "c", "a", "b"}
+
+	set1 := NewSetFromSlice(x)
+
+	if set1.All("e", "f", "a") {
+		t.Errorf("All() should be false")
+	}
+
+	if !set1.All("b", "d", "c") {
+		t.Errorf("All() should be true")
+	}
+}
