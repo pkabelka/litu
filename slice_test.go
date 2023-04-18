@@ -169,6 +169,21 @@ func TestEqualUnordered(t *testing.T) {
 	}
 }
 
+func BenchmarkEqualUnordered(b *testing.B) {
+	x := make([]uint64, 10000000)
+	y := make([]uint64, 10000000)
+	var i uint64
+	for i = 0; i < 10000000; i++ {
+		x[i] = i
+		y[i] = i
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		EqualUnordered(x, y)
+	}
+}
+
 func TestTake(t *testing.T) {
 	x := []string{"a", "b", "c", "d"}
 
