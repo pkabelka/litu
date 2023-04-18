@@ -48,7 +48,23 @@ func EqualUnordered[T comparable](a, b []T) bool {
 	if len(a) != len(b) {
 		return false
 	}
-	return All(a, b)
+	lutA := make(map[T]int, len(a))
+	lutB := make(map[T]int, len(b))
+	for _, e := range a {
+		if _, ok := lutA[e]; ok {
+			lutA[e]++
+			continue
+		}
+		lutA[e] = 1
+	}
+	for _, e := range b {
+		if _, ok := lutB[e]; ok {
+			lutB[e]++
+			continue
+		}
+		lutB[e] = 1
+	}
+	return EqualMap(lutA, lutB)
 }
 
 func Take[T any](a []T, indices []int) ([]T, error) {

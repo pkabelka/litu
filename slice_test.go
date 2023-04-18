@@ -158,6 +158,15 @@ func TestEqualUnordered(t *testing.T) {
 	if res != true {
 		t.Errorf("res = %v, want %v", res, true)
 	}
+
+	a = []string{"a", "b", "c", "b"}
+	b = []string{"b", "c", "a", "c"}
+
+	res = EqualUnordered(a, b)
+
+	if res == true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
 }
 
 func TestTake(t *testing.T) {
