@@ -71,13 +71,10 @@ func (s Set[T]) Union(s2 Set[T]) Set[T] {
 	return res
 }
 
-func (s Set[T]) LeftJoin(s2 Set[T]) Set[T] {
+func (s Set[T]) LeftOnly(s2 Set[T]) Set[T] {
 	res := NewSet[T](len(s) + len(s2))
 	for e := range s {
-		res.Add(e)
-	}
-	for e := range s2 {
-		if s.Contains(e) {
+		if !s2.Contains(e) {
 			res.Add(e)
 		}
 	}

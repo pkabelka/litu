@@ -160,16 +160,23 @@ func TestSetUnion(t *testing.T) {
 	}
 }
 
-func TestSetLeftJoin(t *testing.T) {
+func TestSetLeftOnly(t *testing.T) {
 	x := []string{"a", "b", "c", "d"}
 	y := []string{"c", "d", "e", "f"}
 
 	set1 := NewSetFromSlice(x)
 	set2 := NewSetFromSlice(y)
 
-	res := set1.LeftJoin(set2)
+	res := set1.LeftOnly(set2)
 
-	expect := map[string]struct{}{"a": {}, "b": {}, "c": {}, "d": {}}
+	expect := map[string]struct{}{"a": {}, "b": {}}
+	if !EqualMap(res, expect) {
+		t.Errorf("res = %q, want %q", res, expect)
+	}
+
+	res = set2.LeftOnly(set1)
+
+	expect = map[string]struct{}{"e": {}, "f": {}}
 	if !EqualMap(res, expect) {
 		t.Errorf("res = %q, want %q", res, expect)
 	}
