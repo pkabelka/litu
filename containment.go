@@ -91,17 +91,17 @@ func KeysOf[K, V comparable](m map[K]V, v V) []K {
 	return res
 }
 
-func AnyKeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
+func AnyKeyOf[K, V comparable](a map[K]V, el V) (K, bool) {
 	for i, e := range a {
 		if e == el {
 			return i, true
 		}
 	}
-	var empty U
+	var empty K
 	return empty, false
 }
 
-func ValInMap[T comparable, U comparable](a map[U]T, el T) bool {
+func ValInMap[K, V comparable](a map[K]V, el V) bool {
 	_, found := AnyKeyOf(a, el)
 	return found
 }
