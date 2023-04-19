@@ -264,18 +264,18 @@ func TestKeysOf(t *testing.T) {
 	}
 }
 
-func TestInMap(t *testing.T) {
+func TestValInMap(t *testing.T) {
 	x := map[string]int{
 		"foo": 1,
 		"bar": 2,
 	}
 
-	res := InMap(x, 1)
+	res := ValInMap(x, 1)
 	if res != true {
 		t.Errorf("res = %v, want %v", res, true)
 	}
 
-	res = InMap(x, 3)
+	res = ValInMap(x, 3)
 	if res != false {
 		t.Errorf("res = %v, want %v", res, false)
 	}

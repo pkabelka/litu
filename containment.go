@@ -101,7 +101,7 @@ func AnyKeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
 	return empty, false
 }
 
-func InMap[T comparable, U comparable](a map[U]T, el T) bool {
+func ValInMap[T comparable, U comparable](a map[U]T, el T) bool {
 	_, found := AnyKeyOf(a, el)
 	return found
 }
