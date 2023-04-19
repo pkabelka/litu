@@ -224,13 +224,13 @@ func BenchmarkInSliceRawLoop(b *testing.B) {
 	}
 }
 
-func TestKeyOf(t *testing.T) {
+func TestAnyKeyOf(t *testing.T) {
 	x := map[string]int{
 		"foo": 1,
 		"bar": 2,
 	}
 
-	key, res := KeyOf(x, 1)
+	key, res := AnyKeyOf(x, 1)
 	if res != true {
 		t.Errorf("res = %v, want %v", res, true)
 	}
@@ -238,9 +238,29 @@ func TestKeyOf(t *testing.T) {
 		t.Errorf("res = %v, want %v", key, "foo")
 	}
 
-	_, res = KeyOf(x, 3)
+	_, res = AnyKeyOf(x, 3)
 	if res != false {
 		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestKeysOf(t *testing.T) {
+	x := map[string]int{
+		"foo": 1,
+		"bar": 2,
+		"baz": 1,
+	}
+
+	res := KeysOf(x, 1)
+	expect := []string{"foo", "baz"}
+	if !EqualUnordered(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = KeysOf(x, 3)
+	expect = []string{}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
 	}
 }
 

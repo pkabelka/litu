@@ -81,7 +81,17 @@ func InSlice[T comparable](a []T, el T) bool {
 	return found
 }
 
-func KeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
+func KeysOf[K, V comparable](m map[K]V, v V) []K {
+	res := make([]K, 0, len(m))
+	for k, e := range m {
+		if e == v {
+			res = append(res, k)
+		}
+	}
+	return res
+}
+
+func AnyKeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
 	for i, e := range a {
 		if e == el {
 			return i, true
@@ -92,7 +102,7 @@ func KeyOf[T comparable, U comparable](a map[U]T, el T) (U, bool) {
 }
 
 func InMap[T comparable, U comparable](a map[U]T, el T) bool {
-	_, found := KeyOf(a, el)
+	_, found := AnyKeyOf(a, el)
 	return found
 }
 
