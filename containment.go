@@ -76,8 +76,8 @@ func CountWhere[T any](a []T, f func(e T) bool) int {
 	return count
 }
 
-func InSlice[T comparable](a []T, el T) bool {
-	_, found := IndexOfFirst(a, el)
+func InSlice[T comparable](a []T, e T) bool {
+	_, found := IndexOfFirst(a, e)
 	return found
 }
 
@@ -91,18 +91,18 @@ func KeysOf[K, V comparable](m map[K]V, v V) []K {
 	return res
 }
 
-func AnyKeyOf[K, V comparable](a map[K]V, el V) (K, bool) {
-	for i, e := range a {
-		if e == el {
-			return i, true
+func AnyKeyOf[K, V comparable](a map[K]V, v V) (K, bool) {
+	for k, e := range a {
+		if e == v {
+			return k, true
 		}
 	}
 	var empty K
 	return empty, false
 }
 
-func ValInMap[K, V comparable](a map[K]V, el V) bool {
-	_, found := AnyKeyOf(a, el)
+func ValInMap[K, V comparable](a map[K]V, v V) bool {
+	_, found := AnyKeyOf(a, v)
 	return found
 }
 
