@@ -1,17 +1,21 @@
 package litu
 
 func Keys[T ~map[K]V, K comparable, V any](a T) []K {
-	res := make([]K, 0, len(a))
+	res := make([]K, len(a))
+	i := 0
 	for k := range a {
-		res = append(res, k)
+		res[i] = k
+		i++
 	}
 	return res
 }
 
 func Values[T ~map[K]V, K comparable, V any](a T) []V {
-	res := make([]V, 0, len(a))
+	res := make([]V, len(a))
+	i := 0
 	for _, v := range a {
-		res = append(res, v)
+		res[i] = v
+		i++
 	}
 	return res
 }
