@@ -27,9 +27,6 @@ func (s Set[T]) Add(e ...T) {
 
 func (s Set[T]) Remove(e ...T) {
 	for _, v := range e {
-		if !s.Contains(v) {
-			continue
-		}
 		delete(s, v)
 	}
 }
