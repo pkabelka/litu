@@ -71,3 +71,60 @@ func TestEqualMap(t *testing.T) {
 		t.Errorf("EqualMap should return false")
 	}
 }
+
+func TestAnyKeyOf(t *testing.T) {
+	x := map[string]int{
+		"foo": 1,
+		"bar": 2,
+	}
+
+	key, res := AnyKeyOf(x, 1)
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+	if key != "foo" {
+		t.Errorf("res = %v, want %v", key, "foo")
+	}
+
+	_, res = AnyKeyOf(x, 3)
+	if res != false {
+		t.Errorf("res = %v, want %v", res, false)
+	}
+}
+
+func TestKeysOf(t *testing.T) {
+	x := map[string]int{
+		"foo": 1,
+		"bar": 2,
+		"baz": 1,
+	}
+
+	res := KeysOf(x, 1)
+	expect := []string{"foo", "baz"}
+	if !EqualUnordered(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+
+	res = KeysOf(x, 3)
+	expect = []string{}
+	if !Equal(res, expect) {
+		t.Errorf("res = %v, want %v", res, expect)
+	}
+}
+
+func TestValInMap(t *testing.T) {
+	x := map[string]int{
+		"foo": 1,
+		"bar": 2,
+	}
+
+	res := ValInMap(x, 1)
+	if res != true {
+		t.Errorf("res = %v, want %v", res, true)
+	}
+
+	res = ValInMap(x, 3)
+	if res != false {
+		t.Errorf("res = %v, want %v", res, false)
+	}
+}

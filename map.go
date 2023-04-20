@@ -27,3 +27,28 @@ func EqualMap[A, B ~map[K]V, K, V comparable](a A, b B) bool {
 	}
 	return true
 }
+
+func KeysOf[K, V comparable](m map[K]V, v V) []K {
+	res := make([]K, 0, len(m))
+	for k, e := range m {
+		if e == v {
+			res = append(res, k)
+		}
+	}
+	return res
+}
+
+func AnyKeyOf[K, V comparable](a map[K]V, v V) (K, bool) {
+	for k, e := range a {
+		if e == v {
+			return k, true
+		}
+	}
+	var empty K
+	return empty, false
+}
+
+func ValInMap[K, V comparable](a map[K]V, v V) bool {
+	_, found := AnyKeyOf(a, v)
+	return found
+}
