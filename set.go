@@ -32,9 +32,11 @@ func (s Set[T]) Remove(e ...T) {
 }
 
 func (s Set[T]) ToSlice() []T {
-	res := make([]T, 0, len(s))
+	res := make([]T, len(s))
+	i := 0
 	for e := range s {
-		res = append(res, e)
+		res[i] = e
+		i++
 	}
 	return res
 }
