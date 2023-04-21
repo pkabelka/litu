@@ -511,10 +511,10 @@ func TestMax(t *testing.T) {
 	}
 }
 
-func TestDedupeSlice(t *testing.T) {
+func TestDeduplicate(t *testing.T) {
 	x := []string{"a", "b", "c", "b", "c", "d"}
 
-	res := DedupeSlice(x)
+	res := Deduplicate(x)
 
 	expect := []string{"a", "b", "c", "d"}
 	for _, e := range expect {
@@ -530,7 +530,7 @@ func TestDedupeSlice(t *testing.T) {
 	}
 }
 
-func BenchmarkDedupeSlice(b *testing.B) {
+func BenchmarkDeduplicate(b *testing.B) {
 	x := make([]uint64, 10000000)
 	var i uint64
 	var j uint64
@@ -545,11 +545,11 @@ func BenchmarkDedupeSlice(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		DedupeSlice(x)
+		Deduplicate(x)
 	}
 }
 
-func BenchmarkDedupeSliceRaw(b *testing.B) {
+func BenchmarkDeduplicateRaw(b *testing.B) {
 	x := make([]uint64, 10000000)
 	var i uint64
 	var j uint64

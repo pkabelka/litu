@@ -223,7 +223,7 @@ func Max[T Number | ~string](a []T) T {
 	return max
 }
 
-func DedupeSlice[T comparable](a []T) []T {
+func Deduplicate[T comparable](a []T) []T {
 	set := NewSet[T](len(a))
 	res := make([]T, 0, len(a))
 	for _, e := range a {
