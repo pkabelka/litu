@@ -25,6 +25,13 @@ func Reduce[T, A any](a []T, f func(acc A, e T) A, acc A) A {
 	return acc
 }
 
+func ReduceRight[T, A any](a []T, f func(acc A, e T) A, acc A) A {
+	for i := len(a) - 1; i >= 0; i-- {
+		acc = f(acc, a[i])
+	}
+	return acc
+}
+
 func ScanLeft[T, A any](a []T, f func(acc A, e T) A, acc A) []A {
 	res := make([]A, len(a))
 	for i, e := range a {
