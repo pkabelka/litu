@@ -46,7 +46,13 @@ func (root *Trie[K, V]) Get(keyPath ...K) *Trie[K, V] {
 func (root *Trie[K, V]) Remove(keyPath ...K) bool {
 	tmp := root.Get(keyPath...)
 
-	if tmp == nil || len(tmp.next) > 0 {
+	if tmp == nil {
+		return false
+	}
+
+	if len(tmp.next) > 0 {
+		var empty V
+		tmp.Value = empty
 		return false
 	}
 
