@@ -1,5 +1,7 @@
 package litu
 
+import "errors"
+
 type Trie[K comparable, V any] struct {
 	Value    V
 	next     map[K]*Trie[K, V]
@@ -73,7 +75,11 @@ func (root *Trie[K, V]) Remove(keyPath ...K) bool {
 	return true
 }
 
-func (node *Trie[K, V]) Each(callback func(key K, node *Trie[K, V])) {
+func (node *Trie[K, V]) Each(callback func(key K, node *Trie[K, V])) error {
+	if node == nil {
+		return errors.New("Trie node cannot be nil")
+	}
+
 	nodeStack := make([]*Trie[K, V], 0, len(node.next))
 	keyStack := make([]K, 0, len(node.next))
 	visited := map[*Trie[K, V]]struct{}{}
@@ -101,4 +107,6 @@ func (node *Trie[K, V]) Each(callback func(key K, node *Trie[K, V])) {
 		nodeStack = nodeStack[:len(nodeStack)-1]
 		keyStack = keyStack[:len(keyStack)-1]
 	}
+
+	return nil
 }
