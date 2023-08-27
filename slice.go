@@ -175,7 +175,7 @@ func All[T comparable](a, b []T) bool {
 	return true
 }
 
-func IndexOfMin[T Number | ~string](el ...T) (int, T) {
+func IndexOfMin[T Number | ~string](el []T) (int, T) {
 	var min T
 
 	if len(el) == 0 {
@@ -195,11 +195,11 @@ func IndexOfMin[T Number | ~string](el ...T) (int, T) {
 }
 
 func Min[T Number | ~string](e ...T) T {
-	_, min := IndexOfMin(e...)
+	_, min := IndexOfMin(e)
 	return min
 }
 
-func IndexOfMax[T Number | ~string](el ...T) (int, T) {
+func IndexOfMax[T Number | ~string](el []T) (int, T) {
 	var max T
 
 	if len(el) == 0 {
@@ -219,7 +219,7 @@ func IndexOfMax[T Number | ~string](el ...T) (int, T) {
 }
 
 func Max[T Number | ~string](e ...T) T {
-	_, max := IndexOfMax(e...)
+	_, max := IndexOfMax(e)
 	return max
 }
 

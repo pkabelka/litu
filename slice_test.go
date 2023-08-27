@@ -472,7 +472,7 @@ func TestAll(t *testing.T) {
 func TestIndexOfMin(t *testing.T) {
 	x := []int{3, 5, 7, 11, 2, 4}
 
-	idx, min := IndexOfMin(x...)
+	idx, min := IndexOfMin(x)
 	if min != 2 {
 		t.Errorf("min = %v, want %v", min, 2)
 	}
@@ -484,7 +484,7 @@ func TestIndexOfMin(t *testing.T) {
 func TestIndexOfMax(t *testing.T) {
 	x := []int{3, 5, 7, 11, 2, 4}
 
-	idx, max := IndexOfMax(x...)
+	idx, max := IndexOfMax(x)
 	if max != 11 {
 		t.Errorf("max = %v, want %v", max, 11)
 	}
